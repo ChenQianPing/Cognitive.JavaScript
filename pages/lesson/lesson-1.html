@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+<script>
+	//var str;
+	//console.log(str);//undefined
+
+	//var str;
+	//var str2 = "张三";
+	//str = str + str2;
+	//console.log(str);//并不是我们意料中的张三，而是undefined张三
+
+
+	var str = Boolean(NaN); //false
+	var str2 = Boolean("张三"); //true
+	var str3 = Boolean(undefined);//false
+	console.log(str + " " + str2 + " " + str3);
+
+	if (str) {
+		//str只要是非空字符、任何非零数字、任何非null对象 都是true
+		//str只要是空字符、0、NaN、null、undefined 都是false
+		//这样就省去了 我们一个个的判断了
+		console.log("true");
+	} else {
+		console.log("false");
+	}
+
+
+	//var age = 3, age2 = 3;
+	//age++;
+	//++age2;
+	//console.log(age + "  " + age2);//4  4，都是4，好像看不出有什么不同。
+
+	//var age = 3, age2 = 3, num1, num2;
+	//num1 = age++ + 1;
+	//num2 = ++age2 + 1;
+	//console.log(num1);//4，age++先执行运算符+然后在自身加1
+	//console.log(num2);//5，++age先自身加1然后再通过+运算符加1。
+
+	//var num1 = 25; //二进制    00000000000000000000000000011001
+	//var num2 = ~num1; //二进制 11111111111111111111111111100110
+	//console.log(num2); //按位非，-26，简单的理解，对任一数值 x 进行按位非操作的结果为 -(x+1)
+
+	//var result = 25 & 3;
+	//console.log(result); //1
+	
+	//25 = 0000 0000 0000 0000 0000 0000 0001 1001
+	//3 =  0000 0000 0000 0000 0000 0000 0000 0011
+	//---------------------------------------------
+	//AND = 0000 0000 0000 0000 0000 0000 0000 0001  按位与
+
+	//var result = 25 ^ 3;
+	//console.log(result); //26
+
+	//25 = 0000 0000 0000 0000 0000 0000 0001 1001
+	//3 =  0000 0000 0000 0000 0000 0000 0000 0011
+	//---------------------------------------------
+	//XOR = 0000 0000 0000 0000 0000 0000 0001 1010 //十进制值 26 按位异或
+	
+	//var oldValue = 2; //等于二进制的 10
+	//var newValue = oldValue << 5; //左移，等于二进制的 1000000，十进制的 64
+	//console.log(newValue);//64
+
+	//var oldValue = 64; // 等于二进制的 1000000
+	//var newValue = oldValue >> 5; // 等于二进制的 10 ，即十进制的 2，有符号右移
+	//console.log(newValue);//2
+
+	//var oldValue = -64; // 等于二进制的 11111111111111111111111111000000
+	//var newValue = oldValue >>> 5; // 00000111111111111111111111111110 等于十进制的 134217726
+	//console.log(newValue);//134217726，无符号右移（这个差异有点大，因为第32为1代表负数的值也移过来了）
+
+	//var age = 3;
+	//if (age || aaa) {//这里的age转Boolean为ture，所以后面的aaa就不检测了。
+	//	console.log(age);  //3
+	//}
+	//if (aaa || age) {//这里将会报错
+	//	console.log(age);  //Uncaught ReferenceError: aaa is not defined
+	//}
+
+	//var obj = null;
+	//var obj2 = obj || "备胎";
+	//console.log(obj2);  //备胎，这里可以告诉大家一个小小的技巧，很多时候我们并不知道某个变量是否有值，但是我们又需要正常使用，那么我们可以给个备胎。
+
+	//var strnum1 = "5";
+	//var num2 = strnum1 + 3;
+	//var num3 = strnum1 - 3;
+	//console.log("num2=" + num2 + " num3=" + num3);//这里会是什么结果呢？num2=53 num3=2  为什么会这样？字符串和数字相加，数字会转为字符串。字符串和数字相减，字符串转为数字。
+
+
+</script>
+</body>
+</html>
+
+<!--
+Tips：
+#数据类型
+1.每次var声明都赋初始值，可以减少很多意外情况;
+2.任何数据类型通过Boolean（）函数都可以转成Boolean类型;
+
+
+
+
+-->
+
+
+
