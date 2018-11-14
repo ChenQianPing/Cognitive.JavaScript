@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+<script>
+	//原型链继承
+	//通过设置prototype指向“父类”的实例来实现继承。
+	//function Obj1() {
+	//	this.name1 = "张三";
+	//}
+	//function Obj2() {
+	//}
+	//Obj2.prototype = new Obj1();
+	//var t2 = new Obj2();
+	//console.log(t2.name1);//张三
+	//这里有个明显的缺点就是：（如果父类的属性是引用类型，那么我们在对象实例修改属性的时候会把原型中的属性修改，这样会在每个实例对象中改变数据，而这不是我们想要的效果）
+
+	//function Obj1() {
+	//	this.arr = ["张三"];
+	//}
+	//function Obj2() {
+	//}
+	//Obj2.prototype = new Obj1();
+	//var t2 = new Obj2();
+	//console.log(t2.arr);//打印“张三”
+	//t2.arr[t2.arr.length] = "李四";
+	//var t1 = new Obj2();
+	//console.log(t1.arr);//打印“张三,李四”
+
+	//利用构造函数来实现继承
+	//function Obj1() {
+	//	this.arr = ["张三"];
+	//}
+	//function Obj2() {
+	//	Obj1.call(this);//【1.新增】
+	//}
+	////Obj2.prototype = new Obj1();【2.注释这行】
+	//var t2 = new Obj2();
+	//console.log(t2.arr);//打印“张三”
+	//t2.arr[t2.arr.length] = "李四";
+	//var t1 = new Obj2();
+	//console.log(t1.arr);//打印“张三”
+
+	//同样，单纯的这种方式也是有问题的。因为我们这样就无法继承对象的方法了。如：
+
+	//function Obj1() {
+	//	this.arr = ["张三"];
+	//}
+	//Obj1.prototype.sayHi = function () { console.log(this.arr); }////【1.新增】
+	//function Obj2() {
+	//	Obj1.call(this);
+	//}
+	//var t2 = new Obj2();
+
+	//通过原型和构造来实现继承
+	//function Obj1() {
+	//	this.arr = ["张三"];
+	//}
+	//Obj1.prototype.sayHi = function() {
+	//	 console.log(this.arr);
+	//}
+	//function Obj2() {
+	//	Obj1.call(this);
+	//}
+	//Obj2.prototype = new Obj1();//【1.新增】
+	//var t2 = new Obj2();
+	//t2.sayHi();//["张三"]
+
+	//如上，通过构造函数中的  Obj1.call(this); 
+	//和设置原型属性 Obj2.prototype = new Obj1(); 结合使用，完美解决问题。
+
+	//function Obj1() {
+	//	this.arr = ["张三"];
+	//}
+	//Obj1.prototype.sayHi = function () { console.log(this.arr); }
+	//function Obj2() {
+	//	Obj1.call(this);
+	//}
+	//Obj2.prototype = Obj1.prototype;//【1.新增】
+	//var t2 = new Obj2();
+	//t2.constructor.prototype.sayHi = function () { console.log("test") };//修改Obj2中的原型的方法
+	//var t1 = new Obj1();
+	//t1.sayHi();//test
+	////影响到了Obj1中的原型的方法。因为 Obj2.prototype = Obj1.prototype;让两个对象的原型指向了同一处。
+	////所以还是只能用Obj2.prototype = new Obj1();
+
+
+	//原型链 
+	//*************Obj1****
+	//function Obj1() {
+	//	this.arr = ["张三"];
+	//}
+	//Obj1.prototype.sayHi = function () { console.log(this.arr); }
+
+	////*************Obj2****
+	//function Obj2() {
+	//	Obj1.call(this);
+	//	this.name = "张三";
+	//}
+	//Obj2.prototype = new Obj1();
+	//Obj2.prototype.sayHi2 = function () { console.log(this.name); };
+
+	////*************Obj3****
+	//function Obj3() {
+	//	Obj2.call(this);
+	//}
+	//Obj3.prototype = new Obj2();
+	//Obj3.prototype.sayHi3 = function () { };
+
+	////*******************
+	//var t3 = new Obj3();
+	//t3.sayHi(); //["张三"]
+
+	// Obj3继承Obj2，Obj2继承Obj1。
+	//我们的Obj3的实例对象访问sayHi的时候，
+	//会先去Obj3的实例对象中找sayHi方法（没找到），
+	//然后去Obj3的原型中找（没找到），
+	//然后去父类Obj2的原型中找（没找到），
+	//然后去Obj1的原型中找（找到了）。这个找的路径就是原型链。
+
+
+	//function Obj1() {
+	//	this.name2 = "张三";
+	//}
+	//Obj1.prototype.sayhi = function () {
+	//	alert(this.name2);
+	//}
+
+	//function Obj2() {
+	//	Obj1.call(this);//继承属性
+	//}
+	//Obj2.prototype = new Obj1();
+	//var obj = new Obj2();
+
+	function Obj1() {
+		this.name2 = "张三";
+	}
+	Obj1.prototype.sayhi = function () {
+		alert(this.name2);
+	}
+
+	function Obj2() {
+		Obj1.call(this);//继承属性
+	}
+	//Obj2.prototype = new Obj1();
+	Obj2.prototype = Object.create(Obj1.prototype);//继承原型中的方法【E5中才有的一种新的对象创建方式】
+	var obj = new Obj2();
+
+
+</script>
+
+</body>
+</html>

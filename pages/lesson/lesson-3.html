@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+<script>
+	//Object、Function等引用类型
+	//通过构造函数来创建
+	//var obj = new Object();
+	//obj.name = "张三";//动态添加属性并赋值
+	//obj.age = 23;
+
+	//console.log(obj.name);//张三
+
+	//通过字面量表示法来创建对象
+	//var obj = {
+	//	name: "张三",
+	//	age: 23
+	//};
+	//console.log(obj.age);//23
+
+	//var obj = {};
+	//obj.name = "张三";
+	//obj.age = 23;
+	//console.log(obj.age);//23
+
+	//var obj = {
+	//	"name": "张三", //给属性加上双引号
+	//	age: 23
+	//};
+	//console.log(obj.name);//张三
+
+	//var obj = {
+	//	"name tow": "张三",
+	//	age: 23
+	//};
+	//console.log(obj["name tow"]);//这里可以正常弹出
+
+	//var arr2 = [5, 4, 3, 2, 1];//通过字面量表达式来创建
+	//var str2 = "";
+	//for (var i = 0; i < arr2.length; i++) {
+	//	str2 += arr2[i] + ",";
+	//}
+	//console.log(str2);//打印拼接的字符串 5,4,3,2,1,
+	//console.log(arr2);//直接打印变量名（实际上会自动调用数组的toString方法）
+	
+	//往数组添值
+	//var arr2 = [5, 4, 3, 2, 1];//通过字面量表达式来创建
+	////console.log(arr2.join('_'));//直接打印变量名（实际上会自动调用数组的toString方法）5_4_3_2_1
+	//arr2[4] = 7; arr2[5] = 8;
+	////console.log(arr2.join('_'));//5_4_3_2_7_8
+	//arr2[arr2.length] = 9; arr2[arr2.length] = 10;
+	//console.log(arr2.join('_'));//5_4_3_2_7_8_9_10
+
+	//栈方法、队列方法：
+	//shitf和pop、shift和unshift的组合可以实现队列的数据机构访问方式。 
+	//这里需要注意：pop和shift取数据的同时，数组中对于的值也同时移除了。
+	//var arr2 = [5, 4, 3, 2, 1];
+	//console.log("arr2.pop：" + arr2.pop() + "  arr2：" + arr2);//arr2.pop：1  arr2：5,4,3,2
+
+	//数组的排序
+	//var arr2 = [5, 14, 23, 12, 1];
+	////console.log(arr2.sort());//(5) [1, 12, 14, 23, 5]
+	////因为sort不会直接比较数字类型，而已转为string了再做的比较。
+
+	////我们可以往sort传函数
+	//function mycompare(o1, o2) {
+	//	return o1 - o2;//如果为正数则o1大，负数则o2大，零则相等。
+	//}
+	//console.log(arr2.sort(mycompare));  //(5) [1, 5, 12, 14, 23]
+
+
+	//var arr2 = [5, 14, 23, 12, 1, 123, 23, 4, 5, 6, 32, 5, 3, 2, 1];
+	//arr2.mysort = function (fun) {
+	//	//*********************具体排序过程*******************
+	//	for (var i = 0; i < arr2.length - 1; i++) {
+	//		for (var j = 0; j < arr2.length - i; j++) {
+	//			if (fun(arr2[j], arr2[j + 1]) > 0) {//这里用我们传进来的方法判断是否要排序调换位置
+	//				var temp = arr2[j];
+	//				arr2[j] = arr2[j + 1];
+	//				arr2[j + 1] = temp;
+	//			}
+	//		}
+	//	}
+	//	//***************************************************
+	//	return arr2;
+	//}
+	//function mycompare(o1, o2) {
+	//	return o1 - o2;//回调函数（具体的比较规则）
+	//}
+	//console.log(arr2.mysort(mycompare));
+
+
+	//function mysort(o1, o2) {
+	//	return o1 - o2;//如果为正数则o1大，负数则o2大，零则相等。
+	//}
+	//var arr2 = [5, 14, 23, 12, 1];
+	//arr2.sort(mysort);
+	//arr2.reverse();
+	//console.log(arr2);//(5) [23, 14, 12, 5, 1]
+
+	//concat创建一个新的副本，并合并传进来的参数
+	//var colors = ["red", "green", "blue"];
+	//var colors2 = colors.concat("yellow", ["black", "brown"]);
+	//console.log(colors); //red,green,blue
+	//console.log(colors2); //red,green,blue,yellow,black,brow
+
+	//slice创建一个新的副本，取数组的位置数据
+	//var colors = ["red", "green", "blue", "yellow", "purple"];
+	//var colors2 = colors.slice(1);//从下标为1的开始，到末尾
+	//var colors3 = colors.slice(1, 4);//从下标1（包含1）到4（不包含4）
+	//console.log(colors2); //green,blue,yellow,purple
+	//console.log(colors3); //green,blue,yellow
+
+	//splice会改变原数组数据，可实现对数组的删、插和替换
+	//var colors = ["red", "green", "blue"];
+	////****************删**********************
+	//var removed = colors.splice(0, 1); // 删除第一项（从下标0开始，删除1项）
+	//console.log(colors); // green,blue
+	//console.log(removed); // red，返回的数组中只包含一项
+	////****************插**********************
+	//removed = colors.splice(1, 0, "yellow", "orange"); // 从位置 1 开始插入两项（从下标1开始，删除0项，并插入后面的参数数据）
+	//console.log(colors); // green,yellow,orange,blue
+	//console.log(removed); // 返回的是一个空数组
+	////****************替换**********************
+	//removed = colors.splice(1, 1, "red", "purple"); // 插入两项，删除一项（从下标1开始，删除1项[也就是yellow]，并插入后面的参数数据）
+	//console.log(colors); // green,red,purple,orange,blue
+	//console.log(removed); // yellow，返回的数组中只包含一项
+
+	//every()：对数组中的每一项运行给定函数，如果该函数对每一项都返回 true，则返回 true。
+	//var numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+	//var everyResult = numbers.every(function (item, index, array) {
+	//	return (item > 2);
+	//});
+	//console.log(everyResult); //false
+
+	//var str = "", str2 = "";
+	//var numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+	//numbers.forEach(function (item, index, array) {
+	//	str += item + "_";
+	//});
+	//console.log("str：" + str); //1_2_3_4_5_4_3_2_1_
+
+	////**************其实我们完全可以自己模拟实现*******
+	//numbers.myforEach = function (fun) {
+	//	for (var i = 0; i < numbers.length; i++) {
+	//		fun(numbers[i], i, numbers);
+	//	}
+	//}
+	//numbers.myforEach(function(item, index, array) {
+	//	str2 += item + "*";
+	//});
+	////***************************************************
+	//console.log("str：" + str + "  str2：" + str2); //str：1_2_3_4_5_4_3_2_1_  str2：1*2*3*4*5*4*3*2*1*
+
+	//归并方法
+	//var values = [1, 2, 3, 4, 5];
+	//var sum = values.reduce(function (prev, cur, index, array) {
+	//	return prev + cur;
+	//});
+	//console.log(sum); //15
+
+	//也是个循环，第一次执行 prev 是 1， cur 是 2。第二次， prev 是 3（1 加 2 的结果）， cur 是 3（数组的第三项）。这个过程会持续到把数组中的每一项都访问一遍，最后返回结果。reduceRight只是方向相反。
+	//下面我们来模拟：
+	//var numbers = [1, 2, 3, 4, 5, 3];
+	//var sum = numbers.reduce(function (prev, cur, index, array) {
+	//	return prev + cur;
+	//});
+	////***********************模拟实现reduce**************************
+	//numbers.myreduce = function (fun) {
+	//	for (var i = 0; i < numbers.length; i++) {
+	//		var temp = 0;
+	//		for (var j = 0; j < i; j++)
+	//			temp += numbers[j];
+	//		var tempNum = fun(temp, numbers[i], i, numbers);
+	//	}
+	//	return tempNum;
+	//}
+	////*************************************************
+	//var sum2 = numbers.myreduce(function(prev, cur, index, array) {
+	//	return prev + cur;
+	//});
+	//console.log("sum：" + sum + "  sum2：" + sum2); //sum：18  sum2：18
+
+
+	//取得开始时间
+	//var start = Date.now();
+	//console.log(start);//1542179924828
+	////调用函数
+	////doSomething();
+	////取得停止时间
+	//var stop = Date.now();
+	//console.log(stop);//1542179924831
+	//var result = stop - start;
+	//console.log(result);//3
+
+	//下面列出一些常用方法
+	//getTime() 返回表示日期的毫秒数；与valueOf()方法返回的值相同
+	//setTime(毫秒) 以毫秒数设置日期，会改变整个日期
+	//getFullYear() 取得4位数的年份（如2007而非仅07）
+	//getUTCFullYear() 返回UTC日期的4位数年份
+	//setFullYear(年) 设置日期的年份。传入的年份值必须是4位数字（如2007而非仅07）
+	//setUTCFullYear(年) 设置UTC日期的年份。传入的年份值必须是4位数字（如2007而非仅07）
+	//getMonth() 返回日期中的月份，其中0表示一月， 11表示十二月
+	//getUTCMonth() 返回UTC日期中的月份，其中0表示一月， 11表示十二月
+	//setMonth(月) 设置日期的月份。传入的月份值必须大于0，超过11则增加年份
+	//setUTCMonth(月) 设置UTC日期的月份。传入的月份值必须大于0，超过11则增加年份
+	//getDate() 返回日期月份中的天数（1到31）
+	//getUTCDate() 返回UTC日期月份中的天数（1到31）
+	//setDate(日) 设置日期月份中的天数。如果传入的值超过了该月中应有的天数，则增加月份
+	//setUTCDate(日) 设置UTC日期月份中的天数。如果传入的值超过了该月中应有的天数，则增加月份
+	//getDay() 返回日期中星期的星期几（其中0表示星期日， 6表示星期六）
+	//getUTCDay() 返回UTC日期中星期的星期几（其中0表示星期日， 6表示星期六）
+	//getHours() 返回日期中的小时数（0到23）
+	//getUTCHours() 返回UTC日期中的小时数（0到23）
+	//setHours(时) 设置日期中的小时数。传入的值超过了23则增加月份中的天数
+	//setUTCHours(时) 设置UTC日期中的小时数。传入的值超过了23则增加月份中的天数
+	//getMinutes() 返回日期中的分钟数（0到59）
+	//getUTCMinutes() 返回UTC日期中的分钟数（0到59）
+	//setMinutes(分) 设置日期中的分钟数。传入的值超过59则增加小时数
+	//setUTCMinutes(分) 设置UTC日期中的分钟数。传入的值超过59则增加小时数
+	//getSeconds() 返回日期中的秒数（0到59）
+	//getUTCSeconds() 返回UTC日期中的秒数（0到59）
+	//setSeconds(秒) 设置日期中的秒数。传入的值超过了59会增加分钟数
+	//setUTCSeconds(秒) 设置UTC日期中的秒数。传入的值超过了59会增加分钟数
+	//getMilliseconds() 返回日期中的毫秒数
+	//getUTCMilliseconds() 返回UTC日期中的毫秒数
+	//setMilliseconds(毫秒) 设置日期中的毫秒数
+	//setUTCMilliseconds(毫秒) 设置UTC日期中的毫秒数
+	//getTimezoneOffset() 返回本地时间与UTC时间相差的分钟数。例如，美国东部标准时间返回300。在某地进入夏令时的情况下，这个值会有所变化
+
+	//Function类型
+	//console.log(sum1(1, 2));//弹出值 3
+	//console.log(sum2(1, 2));//报异常[sum2 is not a function]
+	//function sum1(num1, num2) {
+	//	 return num1 + num2;
+	//}
+	//var sum2 = function(num1, num2) {
+	//	 return num1 + num2;
+	//};
+	//因为js解析器是从上到下的解析，在执行sum2的时候还没有定义，所以报异常。但是sum1比较特殊，是申明式的。
+	//在执行sum1之前就会”预解析“（函数声明提升）。相当于把sun1的定义提到了最上面(放到源代码树的顶部)。
+
+	//方法重载
+	//严格来说，js中是没有方法重载的，不过我们可以根据参数的个数来模拟。（还有，js中函数的形参我们是不确定类型的）
+	//function sum1(num1, num2) {
+	//	return num1 + num2;
+	//}
+	//function sum1(num1, num2, num3) {
+	//	return num1 + num2 + num3;
+	//}
+	//console.log(sum1(1, 2));//NaN
+	//上面并没有出现我们预料中的结果，因为第二次定义的sun1不是实现的重载，而是直接覆盖了第一次的定义。下面，我们就简单的模拟实现方法重载：
+
+	//模拟实现方法重载
+	//function sum1(num1, num2, num3) {
+	//	if (num1 != undefined && num2 != undefined && num3 != undefined) {
+	//		return num1 + num2 + num3;
+	//	} else if (num1 != undefined && num2 != undefined)
+	//		return num1 + num2;
+
+	//	return num1 + num2 + num3;
+	//}
+
+	//console.log(sum1(1, 2));//3
+	//console.log(sum1(1, 2, 3));//6
+
+	//函数内部属性（arguments 和 this）
+	//function sum1(num1, num2, num3) {
+	//	var temp = 0;
+	//	if (arguments.length === 3) {
+	//		//***********具体实现其逻辑*********************
+	//		for (var i = 0; i < arguments.length; i++) {
+	//			temp += arguments[i];
+	//		}
+	//	}
+	//	else {
+	//		//***********具体实现其逻辑*********************
+	//		for (var j = 0; j < arguments.length; j++) {
+	//			temp += arguments[j];
+	//		}
+	//	}
+	//	return temp;
+	//}
+	//console.log("1+2=" + sum1(1, 2) + "  1+2+3=" + sum1(1, 2, 3));//1+2=3  1+2+3=6
+
+	//var fun = function (num1) {
+	//	if (num1 <= 1) {
+	//		return 1;
+	//	}
+	//	else {
+	//		return num1 * arguments.callee(num1 - 1);
+	//	}
+	//}
+	//var fun2 = fun;
+	//fun = function () {
+	//	return 1;
+	//}
+	//console.log(fun2(5));//这里弹出什么？120
+
+	//函数的另一个内部属性this
+	//var color = "red";
+	//var o = { color: "blue" };
+	//function sayColor() {
+	//	console.log(this.color);
+	//}
+	//sayColor(); //"red"
+	//o.sayColor = sayColor;
+	//o.sayColor(); //"blue"
+
+	//window.color = "red";
+	//var o = { color: "blue" };
+	//function sayColor() {
+	//	console.log(this.color);
+	//}
+	//window.sayColor(); //"red"
+	//o.sayColor = sayColor;
+	//o.sayColor(); //"blue" 
+
+	//var o = { color: "blue" };
+	//var o2 = { color: "red" };
+	//function sayColor() {
+	//	console.log(this.color);
+	//}
+	//sayColor.call(o);//blue
+	//sayColor.call(o2);//red
+
+	//var o = { color: "blue" };
+	//var o2 = { color: "red" };
+	//function sayColor(a, b) {
+	//	console.log(this.color + a + b);
+	//}
+	//sayColor.apply(o, [1, 2]);//只传两个参数，第一个是为this赋值的对象，第二个是函数实参数组 blue12
+	//sayColor.call(o2, 1, 2);//可以传多个参数，第一个是为this赋值的对象，后面的是函数实参用逗号分割 red12
+
+	//基本包装类型
+	//var obj1 = {}; obj1.name2 = "张三";
+	//var str1 = "test"; str1.name2 = "李四";
+	//console.log(obj1.name2 + " " + str1.name2);//张三 undefined
+
+	//var s1 = "some text"; var s2 = s1.substring(2);
+	//console.log(s1);//some text
+	//console.log(s2);//me text
+
+	//URI 编码方法
+	//encodeURI主要对完整的url进行编码(空格会编码成%20)【对应该的解码decodeURI】
+	//http://i.cnblogs.com/EditPosts.aspx?postid%20=%205002381
+	console.log(window.encodeURI("http://i.cnblogs.com/EditPosts.aspx?postid = 5002381"));
+	//encodeURIComponent会把url中的所有特殊字符进行转码（所以，我们一般用来进行部分url转码，如Url中的参数）【对应的解码decodeURIComponent】
+	//http%3A%2F%2Fi.cnblogs.com%2FEditPosts.aspx%3Fpostid%20%3D%205002381
+	console.log(window.encodeURIComponent("http://i.cnblogs.com/EditPosts.aspx?postid = 5002381"));
+</script>
+</body>
+</html>
