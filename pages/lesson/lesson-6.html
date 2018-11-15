@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+<script>
+	//二分查找
+	//非递归算法
+	//function binary_search(arr, key) {
+	//	var low = 0,
+	//		high = arr.length - 1;
+	//	var mid;
+	//	while (low <= high) {
+	//		mid = parseInt((high + low) / 2);
+	//		if (key === arr[mid]) {
+	//			return mid;
+	//		} else if (key > arr[mid]) {
+	//			low = mid + 1;
+	//		} else if (key < arr[mid]) {
+	//			high = mid - 1;
+	//		} else {
+	//			return -1;
+	//		}
+	//	}
+	//};
+
+	//var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 23, 44, 86];
+	//var result = binary_search(arr, 10);
+	//console.log(result); // 9返回目标元素的索引值   
+
+	////递归算法
+	//function binary_search(arr, low, high, key) {
+	//	if (low > high) {
+	//		return -1;
+	//	}
+	//	var mid = parseInt((high + low) / 2);
+	//	if (arr[mid] === key) {
+	//		return mid;
+	//	} else if (arr[mid] > key) {
+	//		high = mid - 1;
+	//		return binary_search(arr, low, high, key);
+	//	} else if (arr[mid] < key) {
+	//		low = mid + 1;
+	//		return binary_search(arr, low, high, key);
+	//	}
+	//};
+	//var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 23, 44, 86];
+	//var result = binary_search(arr, 0, 13, 10);
+	//console.log(result); //9返回目标元素的索引值  
+
+	//贪心算法 钱币找零问题
+	//每一步尽可能用面值大的纸币即可。
+	//在日常生活中我们自然而然也是这么做的。在程序中已经事先将Value按照从小到大的顺序排好。
+	function MinCoinChange(coins) {
+		coins = coins.sort(function (a, b) {
+			return b - a;
+		});
+
+		this.makeChange = function (amount) {
+			var change = [],
+			total = 0;
+			for (var i = 0; i < coins.length; i++) {
+				var coin = coins[i];
+				while (total + coin <= amount) {
+					change.push(coin);
+					total += coin;
+				}
+			}
+			return change;
+		}
+	}
+
+	var coin = new MinCoinChange([1, 5, 10, 20, 50, 100]);  //人民币仅由10元、5元、1元
+	console.log(coin.makeChange(101)); //(2) [100, 1]
+</script>
+</body>
+</html>
